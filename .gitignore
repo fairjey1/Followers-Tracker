@@ -1,0 +1,10 @@
+# Ignorar archivos de Python compilados, entornos virtuales
+__pycache__/
+.env/
+venv/
+# Ignorar bases de datos de SQLite/locales
+*.db
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
