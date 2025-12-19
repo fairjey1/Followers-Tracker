@@ -8,3 +8,15 @@ venv/
 *.db-journal
 *.db-shm
 *.db-wal
+# Ignorar archivos de configuración sensibles
+config.json
+credentials.json
+# Ignorar archivos de registro
+*.log
+logs/
+# Ignorar archivos temporales y de caché
+*.tmp
+*.cache
+temp/
+# ignorar keys de cifrado
+*.key
