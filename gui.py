@@ -45,12 +45,12 @@ class InstagramTrackerApp(ctk.CTk):
         super().__init__()
         self.security = GestorSeguridad()
 
-        self.title("Instagram Tracker Pro v3.0")
+        self.title("Instagram Tracker")
         self.geometry("600x700")
         self.resizable(False, False)
         self.config_file = "config.json"
 
-        self.label_title = ctk.CTkLabel(self, text="Tracker & Notificador", font=("Roboto", 24, "bold"))
+        self.label_title = ctk.CTkLabel(self, text="Instagram Tracker", font=("Roboto", 24, "bold"))
         self.label_title.pack(pady=10)
 
         # --- [NUEVO] CREACIÓN DE PESTAÑAS ---
@@ -62,13 +62,13 @@ class InstagramTrackerApp(ctk.CTk):
         self.tab_email = self.tabview.add("Notificaciones (Email)")
 
         # --- ELEMENTOS DE LA PESTAÑA INSTAGRAM ---
-        self.label_insta = ctk.CTkLabel(self.tab_insta, text="Credenciales de Scraping", font=("Roboto", 16))
+        self.label_insta = ctk.CTkLabel(self.tab_insta, text="Credenciales de cuenta", font=("Roboto", 16))
         self.label_insta.pack(pady=10)
 
         self.entry_user = ctk.CTkEntry(self.tab_insta, placeholder_text="Tu Usuario Instagram", width=350)
         self.entry_user.pack(pady=5)
 
-        self.entry_pass = ctk.CTkEntry(self.tab_insta, placeholder_text="Tu Contraseña Instagram", show="*", width=350)
+        self.entry_pass = ctk.CTkEntry(self.tab_insta, placeholder_text="Cookie de sesión", show="*", width=350)
         self.entry_pass.pack(pady=5)
 
         self.label_targets = ctk.CTkLabel(self.tab_insta, text="Cuentas a analizar (una por línea):")
@@ -78,7 +78,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.textbox_targets.pack(pady=5)
 
         # --- [NUEVO] ELEMENTOS DE LA PESTAÑA EMAIL ---
-        self.label_email = ctk.CTkLabel(self.tab_email, text="Configuración SMTP (Gmail)", font=("Roboto", 16))
+        self.label_email = ctk.CTkLabel(self.tab_email, text="Configuración GMAIL", font=("Roboto", 16))
         self.label_email.pack(pady=10)
 
         # [FIX 2] Agregamos placeholder_text_color="gray" para forzar que se vea el texto
