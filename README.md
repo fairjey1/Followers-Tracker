@@ -3,7 +3,6 @@
 ![Logo App](icon.ico)
 
 Esta es una aplicación de escritorio para monitorear seguidores en Instagram. Detecta quién te dejó de seguir, nuevos seguidores y cambios de nombre de seguidores, enviando notificaciones automáticas por correo electrónico.
-*(Nota: En caso de que la cuenta a trackear sea privada, la "cuenta tracker" debe seguir a la cuenta a trackear, de otra forma dara error)*
 ---
 
 ## ⚠️ ADVERTENCIAS CRÍTICAS (Leer antes de usar)
@@ -65,6 +64,7 @@ Al abrir la aplicación, verás los siguientes campos que debes llenar:
 ### 1. Usuario Objetivo (Target)
 * Es el nombre de usuario (sin @) de la cuenta que quieres analizar.
 * *(Nota: se debe ingresar uno por linea apretando la tecla enter)*
+* *(Nota: En caso de que la cuenta a trackear sea privada, la "cuenta tracker" debe seguir a la cuenta a trackear, de otra forma dara error)*
 
 ### 2. Session ID (Cookie de Sesión)
 **IMPORTANTE:** No usamos contraseña de Instagram por seguridad. Usamos la cookie de una sesión activa de Chrome.
