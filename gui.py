@@ -5,7 +5,8 @@ import json
 import os
 from cryptography.fernet import Fernet 
 import main 
-from main import ruta_config
+from main import ruta_config 
+import ctypes
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
@@ -48,12 +49,20 @@ class GestorSeguridad:
 class InstagramTrackerApp(ctk.CTk):
     def __init__(self):
         super().__init__()
+
+        my_appid = 'instagram.tracker' 
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(my_appid)
+        try:
+            self.iconbitmap("icon.ico")
+        except Exception as e:
+            print(f"No se pudo cargar el icono: {e}")
+
         self.security = GestorSeguridad()
 
         self.title("Instagram Tracker")
         self.geometry("600x700")
         self.resizable(False, False)
-        self.config_file = "config.json"
+        self.config_file = main.ruta_config
 
         self.label_title = ctk.CTkLabel(self, text="Instagram Tracker", font=("Roboto", 24, "bold"))
         self.label_title.pack(pady=10)
@@ -66,7 +75,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.tab_insta = self.tabview.add("Instagram")
         self.tab_email = self.tabview.add("Notificaciones (Email)")
 
-        # Pestaña de instagram
+        # pestaña de instagram
         self.label_insta = ctk.CTkLabel(self.tab_insta, text="Credenciales de cuenta", font=("Roboto", 16))
         self.label_insta.pack(pady=10)
 
@@ -82,11 +91,11 @@ class InstagramTrackerApp(ctk.CTk):
         self.textbox_targets = ctk.CTkTextbox(self.tab_insta, width=350, height=100)
         self.textbox_targets.pack(pady=5)
 
-        # Pestaña de email
+        # pestaña de email
         self.label_email = ctk.CTkLabel(self.tab_email, text="Configuración GMAIL", font=("Roboto", 16))
         self.label_email.pack(pady=10)
 
-        # agregamos los campos de email
+        # campos de email
         self.entry_email_sender = ctk.CTkEntry(self.tab_email, 
                                                placeholder_text="Email Remitente (ej: bot@gmail.com)", 
                                                placeholder_text_color="gray",
@@ -109,8 +118,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.label_info = ctk.CTkLabel(self.tab_email, text="Nota: Usa una 'Contraseña de Aplicación' de Google,\nno tu contraseña normal.", text_color="gray", font=("Roboto", 10))
         self.label_info.pack(pady=10)
 
-        # Elementos comunes (Botón y Logs)
-        # [FIX 1] Agregamos width=400 (o un valor fijo grande) para que el botón no cambie de tamaño
+        # elementos comunes (Botón y Logs)
         self.btn_start = ctk.CTkButton(self, 
                                        text="Guardar Configuración y Comenzar", 
                                        command=self.iniciar_proceso_thread,
@@ -130,7 +138,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.textbox_log.see("end")
         self.textbox_log.configure(state="disabled")
 
-    # Métodos de persistencia
+    # métodos de persistencia
     def guardar_configuracion(self):
         pass_insta_enc = self.security.encriptar(self.entry_pass.get())
         pass_email_enc = self.security.encriptar(self.entry_email_pass.get())
@@ -186,26 +194,19 @@ class InstagramTrackerApp(ctk.CTk):
         insta_user = self.entry_user.get()
         insta_pass = self.entry_pass.get()
         
-        # Empaquetamos la config de email en un diccionario para ser ordenados
         config_email = {
             "sender": self.entry_email_sender.get(),
             "password": self.entry_email_pass.get(),
             "receiver": self.entry_email_receiver.get()
         }
         
-        # Procesamos la lista de objetivos
         raw_targets = self.textbox_targets.get("1.0", "end-1c")
         targets = [line.strip() for line in raw_targets.split('\n') if line.strip()]
 
-        # 2. Validaciones finales (Opcional pero recomendado)
         if not targets:
             self.log_message("Error: No hay cuentas para analizar.")
             self.btn_start.configure(state="normal", text="Guardar Configuración y Comenzar")
             return
-
-        # 3. LLAMADA AL BACKEND (main.py)
-        # Pasamos 'self.log_message' como argumento.
-        # Esto permite que main.py escriba directamente en tu caja de texto.
         try:
             main.iniciar_analisis(
                 usuario=insta_user,
@@ -217,8 +218,11 @@ class InstagramTrackerApp(ctk.CTk):
         except Exception as e:
             self.log_message(f"Error al ejecutar main: {e}")
         
-        # 4. Restaurar botón al finalizar
+        # restaurar botón al finalizar
         self.btn_start.configure(state="normal", text="Guardar Configuración y Comenzar")
+
+
+    
 
 if __name__ == "__main__":
     app = InstagramTrackerApp()
