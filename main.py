@@ -1,5 +1,6 @@
 import instaloader
 import sys
+import os
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime, BigInteger
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.sql import func
@@ -9,9 +10,36 @@ import ssl
 from email.message import EmailMessage
 from datetime import datetime
 
+# -- CONFIGURACIÓN DE RUTAS Y ARCHIVOS ----
+def obtener_ruta_base():
+    """
+    Retorna la ruta del directorio donde está el ejecutable 
+    o la ruta del script (si se ejecuta en Python).
+    """
+    if getattr(sys, 'frozen', False):
+        # Si se ejecuta como .exe compilado
+        application_path = os.path.dirname(sys.executable)
+    else:
+        # Si se ejecuta como script .py normal
+        application_path = os.path.dirname(os.path.abspath(__file__))
+    
+    return application_path
+
+# Usar la función para definir tu carpeta de datos
+ruta_base = obtener_ruta_base()
+data = os.path.join(ruta_base, "data") # Nombre de tu carpeta contenedora
+
+# Crear la carpeta si no existe
+if not os.path.exists(data):
+    os.makedirs(data)
+
+ruta_db = os.path.join(data, "instagram_tracker.db")
+ruta_config = os.path.join(data, "config.json")
+
+
 # --- 1. CONFIGURACIÓN DE SQLITE ---
-# El archivo se creará solo en la misma carpeta
-DATABASE_NAME = "instagram_tracker.db"
+
+DATABASE_NAME = ruta_db
 DATABASE_URL = f"sqlite:///{DATABASE_NAME}"
 
 engine = create_engine(DATABASE_URL)
@@ -31,7 +59,7 @@ class Follower(Base):
     instagram_user_id = Column(BigInteger) # ID único de Instagram
     username = Column(String)              # Nombre de usuario (puede cambiar)
 
-# Crea el archivo .db y las tablas si no existen
+
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 

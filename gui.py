@@ -4,7 +4,8 @@ import time
 import json
 import os
 from cryptography.fernet import Fernet 
-import main
+import main 
+from main import ruta_config
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
@@ -13,6 +14,10 @@ class GestorSeguridad:
     """Clase auxiliar para manejar el cifrado/descifrado"""
     def __init__(self):
         self.key_file = "secret.key"
+        self.key_dir = "keys"
+        if not os.path.exists(self.key_dir):
+            os.makedirs(self.key_dir)
+        self.key_file = os.path.join(self.key_dir, "secret.key")
         self.key = self.cargar_o_crear_key()
         self.cipher = Fernet(self.key)
 
@@ -53,7 +58,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.label_title = ctk.CTkLabel(self, text="Instagram Tracker", font=("Roboto", 24, "bold"))
         self.label_title.pack(pady=10)
 
-        # --- [NUEVO] CREACIÓN DE PESTAÑAS ---
+        # pestañas
         self.tabview = ctk.CTkTabview(self, width=550, height=400)
         self.tabview.pack(pady=10)
 
@@ -61,7 +66,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.tab_insta = self.tabview.add("Instagram")
         self.tab_email = self.tabview.add("Notificaciones (Email)")
 
-        # --- ELEMENTOS DE LA PESTAÑA INSTAGRAM ---
+        # Pestaña de instagram
         self.label_insta = ctk.CTkLabel(self.tab_insta, text="Credenciales de cuenta", font=("Roboto", 16))
         self.label_insta.pack(pady=10)
 
@@ -77,11 +82,11 @@ class InstagramTrackerApp(ctk.CTk):
         self.textbox_targets = ctk.CTkTextbox(self.tab_insta, width=350, height=100)
         self.textbox_targets.pack(pady=5)
 
-        # --- [NUEVO] ELEMENTOS DE LA PESTAÑA EMAIL ---
+        # Pestaña de email
         self.label_email = ctk.CTkLabel(self.tab_email, text="Configuración GMAIL", font=("Roboto", 16))
         self.label_email.pack(pady=10)
 
-        # [FIX 2] Agregamos placeholder_text_color="gray" para forzar que se vea el texto
+        # agregamos los campos de email
         self.entry_email_sender = ctk.CTkEntry(self.tab_email, 
                                                placeholder_text="Email Remitente (ej: bot@gmail.com)", 
                                                placeholder_text_color="gray",
@@ -104,7 +109,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.label_info = ctk.CTkLabel(self.tab_email, text="Nota: Usa una 'Contraseña de Aplicación' de Google,\nno tu contraseña normal.", text_color="gray", font=("Roboto", 10))
         self.label_info.pack(pady=10)
 
-        # --- ELEMENTOS COMUNES (Botón y Logs) ---
+        # Elementos comunes (Botón y Logs)
         # [FIX 1] Agregamos width=400 (o un valor fijo grande) para que el botón no cambie de tamaño
         self.btn_start = ctk.CTkButton(self, 
                                        text="Guardar Configuración y Comenzar", 
@@ -125,7 +130,7 @@ class InstagramTrackerApp(ctk.CTk):
         self.textbox_log.see("end")
         self.textbox_log.configure(state="disabled")
 
-    # --- MÉTODOS DE PERSISTENCIA ---
+    # Métodos de persistencia
     def guardar_configuracion(self):
         pass_insta_enc = self.security.encriptar(self.entry_pass.get())
         pass_email_enc = self.security.encriptar(self.entry_email_pass.get())
@@ -139,7 +144,7 @@ class InstagramTrackerApp(ctk.CTk):
             "email_receiver": self.entry_email_receiver.get()
         }
         try:
-            with open(self.config_file, "w") as f:
+            with open(ruta_config, "w") as f: # Usamos ruta_config desde main.py para guardar en la carpeta correcta
                 json.dump(datos, f)
         except Exception as e:
             self.log_message(f"Error guardando config: {e}")
