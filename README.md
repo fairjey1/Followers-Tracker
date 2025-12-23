@@ -2,8 +2,8 @@
 
 ![Logo App](icon.ico)
 
-Esta es una aplicación de escritorio para monitorear seguidores en Instagram. Detecta quién te dejó de seguir, nuevos seguidores y cambios de nombre de usuario, enviando notificaciones automáticas por correo electrónico.
-
+Esta es una aplicación de escritorio para monitorear seguidores en Instagram. Detecta quién te dejó de seguir, nuevos seguidores y cambios de nombre de seguidores, enviando notificaciones automáticas por correo electrónico.
+*(Nota: En caso de que la cuenta a trackear sea privada, la "cuenta tracker" debe seguir a la cuenta a trackear, de otra forma dara error)*
 ---
 
 ## ⚠️ ADVERTENCIAS CRÍTICAS (Leer antes de usar)
