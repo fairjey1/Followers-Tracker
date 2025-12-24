@@ -1,4 +1,4 @@
-# 🕵️‍♂️ Instagram Follower Tracker & Spy Bot
+# 🕵️‍♂️ Instagram Follower Tracker 
 
 ![Logo App](icon.ico)
 
