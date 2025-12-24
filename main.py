@@ -235,9 +235,10 @@ def iniciar_analisis(usuario, session_id, targets, email_config, log_callback):
 
         try:
             profile = instaloader.Profile.from_username(L.context, target_username)
-            if(profile.is_private and not profile.followed_by_viewer):
-                log_callback(f"❌ La cuenta '{target_username}' es privada y no la sigues. Saltando...")
-                continue
+            if(profile.username != usuario):
+                if(profile.is_private and not profile.followed_by_viewer):
+                    log_callback(f"❌ La cuenta '{target_username}' es privada y no la sigues. Saltando...")
+                    continue
 
             log_callback(f"📊 Cantidad de seguidores detectados: {profile.followers}")
             
@@ -274,5 +275,7 @@ def iniciar_analisis(usuario, session_id, targets, email_config, log_callback):
             log_callback(f"❌ El usuario '{target_username}' no existe.")
         except Exception as e:
             log_callback(f"❌ Ocurrió un error durante la extracción: {e}")
+
+    log_callback("\n🎉 Análisis completado para todos los objetivos.")
 if __name__ == "__main__":
     iniciar_analisis()
