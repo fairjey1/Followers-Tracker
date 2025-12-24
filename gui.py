@@ -59,12 +59,12 @@ class InstagramTrackerApp(ctk.CTk):
 
         self.security = GestorSeguridad()
 
-        self.title("Instagram Tracker")
+        self.title("Insta Tracker")
         self.geometry("600x700")
         self.resizable(False, False)
         self.config_file = main.ruta_config
 
-        self.label_title = ctk.CTkLabel(self, text="Instagram Tracker", font=("Roboto", 24, "bold"))
+        self.label_title = ctk.CTkLabel(self, text="Insta Tracker", font=("Roboto", 24, "bold"))
         self.label_title.pack(pady=10)
 
         # pestañas
