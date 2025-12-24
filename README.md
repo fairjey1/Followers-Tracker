@@ -5,7 +5,7 @@
 Esta es una aplicación de escritorio para monitorear seguidores en Instagram. Detecta quién te dejó de seguir, nuevos seguidores y cambios de nombre de seguidores, enviando notificaciones automáticas por correo electrónico.
 ---
 
-## ⚠️ ADVERTENCIAS CRÍTICAS (Leer antes de usar)
+## ⚠️ ADVERTENCIAS (Leer antes de usar)
 
 El uso de herramientas de scraping automatizado conlleva riesgos. Por favor, ten en cuenta lo siguiente:
 
@@ -43,7 +43,7 @@ Requisitos previos: tener Python 3.10+ instalado.
 
 1.  Clona el repositorio:
     ```bash
-    git clone [https://github.com/tu_usuario/instagram-tracker.git](https://github.com/tu_usuario/instagram-tracker.git)
+    git clone https://github.com/tu_usuario/instagram-tracker.git
     cd instagram-tracker
     ```
 2.  Instala las dependencias:
@@ -77,13 +77,15 @@ Al abrir la aplicación, verás los siguientes campos que debes llenar:
 5.  En la lista del centro, busca la fila llamada `sessionid`.
 6.  Copia todo el contenido de la columna "Value" (es una cadena larga de letras y números).
 7.  Pega eso en la aplicación.
+* *(Nota: Si en algun momento cerras sesión, vas a tener que volver a copiar el Session ID)*
+* *(Recomendación: Si usas una cuenta secundaria, podes abrirla en algun otro navegador que no uses)*
 
 ### 3. Email para Notificaciones
 * Es el correo donde quieres enviar/recibir los reportes.
 * *(Nota: Podes poner como Email remitente la misma cuenta que Email destino)*
 
 ### 4. Contraseña de Aplicación de Google
-Si estás configurando el script para que envíe correos desde TU Gmail, no puedes usar tu contraseña normal. Necesitas una **Contraseña de Aplicación**:
+Si estás configurando para que envíe correos desde tu Gmail, no puedes usar tu contraseña normal. Necesitas una **Contraseña de Aplicación**:
 
 1.  Ve a tu cuenta de Google > **Seguridad**.
 2.  Asegúrate de tener la **Verificación en 2 pasos** activada.
@@ -93,7 +95,7 @@ Si estás configurando el script para que envíe correos desde TU Gmail, no pued
 
 ---
 
-## 🚀 Tecnologías Usadas
+## 🚀 Tecnologías y Librerias Usadas
 
 * **Python 3.10**
 * **CustomTkinter:** Para la interfaz gráfica moderna.
