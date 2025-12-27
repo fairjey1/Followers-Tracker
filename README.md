@@ -10,7 +10,7 @@ Esta es una aplicación de escritorio para monitorear seguidores en Instagram. D
 El uso de herramientas de scraping automatizado conlleva riesgos. Por favor, ten en cuenta lo siguiente:
 
 1.  **Riesgo de Bloqueo:** Instagram tiene límites estrictos. Si ejecutas este escáner demasiadas veces en poco tiempo (ej: cada 5 minutos), tu cuenta o tu IP podrían ser bloqueadas temporalmente (Soft Ban).
-    * *Mi recomendación:* No hagas escaneos frecuentes. No esta testeado que pasa si se hacen mas de 5 escaneos por hora. Asi que no abuses
+    * *Mi recomendación:* No hagas escaneos frecuentes. Con que lo hagas 2 veces ya esta bien
 2.  **Tamaño de la Cuenta:** Esta aplicación está optimizada para **cuentas medianas o chicas** (hasta ~5k - 10k seguidores).
     * *Por qué:* Para cuentas masivas (100k+), la descarga de la lista de seguidores puede tardar demasiado, consumir mucha RAM o activar los sistemas anti-bot de Instagram antes de terminar.
 3.  **Seguridad de la Cuenta:** Recomiendo usar una **cuenta secundaria** para realizar el scraping y espiar. Aun asi con cuenta principal funciona
@@ -70,6 +70,7 @@ Al abrir la aplicación, verás los siguientes campos que debes llenar:
 **IMPORTANTE:** No usamos contraseña de Instagram por seguridad. Usamos la cookie de una sesión activa de Chrome.
 
 **¿Cómo obtener el Session ID?**
+Es muy sencillo:
 1.  Abre [Instagram.com](https://www.instagram.com) en Google Chrome y loguéate (Con la cuenta que vas a usar para trackear).
 2.  Presiona **F12** para abrir las Herramientas de Desarrollador.
 3.  Ve a la pestaña **Application** (en el menú superior del panel derecho).
@@ -78,7 +79,7 @@ Al abrir la aplicación, verás los siguientes campos que debes llenar:
 6.  Copia todo el contenido de la columna "Value" (es una cadena larga de letras y números).
 7.  Pega eso en la aplicación.
 * *(Nota: Si en algun momento cerras sesión, vas a tener que volver a copiar el Session ID)*
-* *(Recomendación: Si usas una cuenta secundaria, podes abrirla en algun otro navegador que no uses)*
+* *(Recomendación: Si usas una cuenta secundaria, podes abrirla en algun otro navegador que no uses y la cookie seguira siendo válida)*
 
 ### 3. Email para Notificaciones
 * Es el correo donde quieres enviar/recibir los reportes.
